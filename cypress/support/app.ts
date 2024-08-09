@@ -11,7 +11,7 @@ declare namespace Cypress {
 *   @param {string} queryParam
 */
     getResource(resource, queryParam?: string, headers?: Object): Chainable;
-    postResource(resource: string, body, token?)
+    postResource(resource: string, body: object)
   }
 }
 
@@ -20,7 +20,8 @@ function getEndpoint(resource) {
   const baseEndpoint = Cypress.env('endpoint')
 
   let options = {
-    todos: "/todos"
+    todos: "/todos",
+    posts: "/posts"
   }
   return baseEndpoint + options[resource]
 }
@@ -42,7 +43,7 @@ Cypress.Commands.add("getResource", (resource, queryParam?: string, headers?: Ob
   return cy.request(requestInfo)
 })
 
-Cypress.Commands.add("postResource", (resource: string, body, headers?) => {
+Cypress.Commands.add("postResource", (resource: string, body:object, headers?) => {
   const endpoint = getEndpoint(resource)
 
   let requestInfo = {
@@ -56,6 +57,5 @@ Cypress.Commands.add("postResource", (resource: string, body, headers?) => {
     requestInfo['headers'] = headers
   }
 
-  console.log(requestInfo)
   return cy.request(requestInfo)
 })
