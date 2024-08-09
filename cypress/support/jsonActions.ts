@@ -85,8 +85,7 @@ Cypress.Commands.add("deletePost", () => {
     id = res.body.id
 
     cy.deleteResource("posts", id)
-  });
-
+  })
 })
 
 
